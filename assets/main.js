@@ -1,49 +1,60 @@
+// Initial set of topics
 var topics = ['Dog', 'Cat', 'skunk', 'Lion', 'Tiger'];
-// http://api.giphy.com/v1/gifs/search?limit=10&api_key=dc6zaTOxFJmzC&q={search term}
 
+// API base url (minus search term)
 var queryURL = 'http://api.giphy.com/v1/gifs/search?limit=10&api_key=dc6zaTOxFJmzC&q=';
 
+// Variable to store search term
 var searchTerm = null;
 
+// Makes a call to the API to get the giphy's related to the specified search term
 function getImages(topic) {
+	// appends our search term to the api url
 	var fullUrl = queryURL + topic;
 
 	$.ajax({
 		url: fullUrl,
 		method: 'GET'
 	}).done(function(response) {
-		console.log(response);
 		displayImages(response);
 	});
 }	
 
+// Displays each of the images pulled from the API and their rating
 function displayImages(images) {
 	$('#images').empty();
 
 	for(var i = 0; i < images.data.length; i++) {
+
+		// creates div, img, and p elements for each giphy
 		var imgDIV = $('<div>');
 		var img = $('<img>');
 		var rating = $('<p>');
+
+		// sets the attributes of the div and img elements
 		imgDIV.addClass('images');
 		img.addClass('image');
-		console.log(images.data[i].images.downsized.url);
 		img.attr('data-still', images.data[i].images.downsized_still.url);
 		img.attr('data-animate', images.data[i].images.downsized.url);
 		img.attr('src', images.data[i].images.downsized_still.url);
 		img.attr('data-state', 'still');
+
+		// adds the rating to the p element
 		rating.html('Rating: ' + images.data[i].rating);
+
+		// appends the image and and rating to our image div. then appends image div to our web app
 		imgDIV.append(rating);
 		imgDIV.append(img);
 		$('#images').append(imgDIV);
 	}
 }
 
+// Creates and displays our topic buttons
 function displayButtons(buttons) {
 
 	$('#buttons').empty();
 	
 	for(var i = 0; i < buttons.length; i++) {
-		console.log('hi');
 		var button = $('<button>');
 		button.addClass('topic btn btn-info')
 		button.attr('data-name', buttons[i]);
@@ -52,16 +63,17 @@ function displayButtons(buttons) {
 	}
 }
 
+// If a giphy images is clicked
 $("#images").on("click", ".image", function() {
-// The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+
+	// prevents refreshing of page
 	event.preventDefault();
 
-	console.log($(this).attr("data-state"));
-
+	// grabs the state of our clicked giphy
 	var state = $(this).attr("data-state");
-	// If the clicked image's state is still, update its src attribute to what its data-animate value is.
-	// Then, set the image's data-state to animate
-	// Else set src to the data-still value
+
+	// if the state is still, change the img src attribute and data-state to animate
+	// else change the img src attribute and data-state to still
 	if (state === "still") {
 		$(this).attr("src", $(this).attr("data-animate"));
 		$(this).attr("data-state", "animate");
@@ -69,25 +81,34 @@ $("#images").on("click", ".image", function() {
 		$(this).attr("src", $(this).attr("data-still"));
 		$(this).attr("data-state", "still");
 	}
-	});
+});
 
-	$("#buttons").on("click", ".topic", function() {
-		event.preventDefault();
-		console.log($(this).attr("data-name"));
-		searchTerm = $(this).attr("data-name");
+// If a topic button is clicked
+$("#buttons").on("click", ".topic", function() {
 
-		getImages(searchTerm);
-	});
+	// prevents refreshing of page
+	event.preventDefault();
 
-	$("#add-topic").on("click", function() {
+	// updates our search term with the button we selected
+	searchTerm = $(this).attr("data-name");
 
-		event.preventDefault();
+	getImages(searchTerm);
+});
 
-		var topic = $("#topic-input").val().trim();
-		topics.push(topic);
-		console.log(topics);
+// If a new topic is submitted
+$("#add-topic").on("click", function() {
 
-		displayButtons(topics);
-	});
+	// prevents refreshing of page
+	event.preventDefault();
+
+	// gets and adds new topic to the array of topics
+	var topic = $("#topic-input").val().trim();
+	topics.push(topic);
+
+	// displays all the buttons again
+	displayButtons(topics);
+});
 
 displayButtons(topics);
+
+

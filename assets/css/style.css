@@ -10,4 +10,9 @@
 }
 .header {
 	text-align: center;
+	margin-top: 12px;
+	padding-bottom: 12px;
+}
+h1 {
+	font-size: 36px;
 }

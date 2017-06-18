@@ -8,7 +8,9 @@
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-		<style type="text/css" src="assets/style.css"></style>
+		<!-- Style sheets -->
+		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 	</head>
 	
@@ -29,10 +31,10 @@
 				<div class="col-lg-3">
 					<div class="panel panel-info panel-default">
   						<div class="panel-heading">
-    						<h3 class="panel-title">Search terms</h3>
+    						<h3 class="panel-title">Search Terms</h3>
   						</div>
   						<div class="panel-body">
-  							<form id="movie-form">
+  							<form id="button-form">
       							<label for="topic-input">Add an animal</label>
      							<input type="text" id="topic-input"><br>
       							<input id="add-topic" type="submit" value="Submit">
@@ -43,6 +45,9 @@
 				</div>
 				<div class="col-lg-9">
 					<div class="panel panel-info panel-default">
+						<div class="panel-heading">
+    						<h3 class="panel-title">Search Results</h3>
+  						</div>
   						<div class="panel-body" id="images">
    	 						<img id="myImage" src="" alt="">
   						</div>
