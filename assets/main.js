@@ -1,5 +1,5 @@
 // Initial set of topics
-var topics = ['Dog', 'Cat', 'skunk', 'Lion', 'Tiger'];
+var topics = ['Dog', 'Cat', 'Skunk', 'Lion', 'Tiger'];
 
 // API base url (minus search term)
 var queryURL = 'https://api.giphy.com/v1/gifs/search?limit=10&api_key=dc6zaTOxFJmzC&q=';
