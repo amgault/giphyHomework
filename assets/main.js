@@ -2,7 +2,7 @@
 var topics = ['Dog', 'Cat', 'skunk', 'Lion', 'Tiger'];
 
 // API base url (minus search term)
-var queryURL = 'http://api.giphy.com/v1/gifs/search?limit=10&api_key=dc6zaTOxFJmzC&q=';
+var queryURL = 'https://api.giphy.com/v1/gifs/search?limit=10&api_key=dc6zaTOxFJmzC&q=';
 
 // Variable to store search term
 var searchTerm = null;
